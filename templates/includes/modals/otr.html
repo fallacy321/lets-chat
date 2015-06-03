@@ -1,34 +1,53 @@
-<div id="lcb-otr" class="lcb-edit-otr modal fade">
+<div id="lcb-otr" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="validate form-horizontal" action="./account/profile" method="POST">
+            <form class="validate form-horizontal" method="submit">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><i class="icon-edit"></i> This is where I will be testing OTR chat </h4>
+                    <h4 class="modal-title"><i class="fa fa-lock"></i> OTR</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label col-sm-6">Display Name</label>
-                        <div class="col-sm-11">
-                            <input class="form-control" name="display-name" type="text" value="<$ account.displayName $>" required data-model="displayName" />
-                        </div>
+                    <div class="form-group row">
+                        <label class="control-label col-sm-6"> OTR encryption choice</label>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-6">First Name</label>
-                        <div class="col-sm-11">
-                            <input class="form-control" name="first-name" type="text" value="<$ account.firstName $>" required data-model="firstName" />
-                        </div>
+                            <div class="radio col-sm-9">
+                                <label><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> ask for OTR encryption</label>
+                                <label><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Automatic OTR encryption</label>
+                            </div>
+                            <div class="radio col-sm-9">
+                                <label><input type="radio" name="optionsRadios" id="optionsRadios3" value="option3"> Forced OTR encryption</label>
+                                <label><input type="radio" name="optionsRadios" id="optionsRadios4" value="option4"> No OTR encryption</label>
+                            </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-6">Last Name</label>
-                        <div class="col-sm-11">
-                            <input class="form-control" name="last-name" type="text" value="<$ account.lastname $>" required data-model="lastName" />
-                        </div>
+                    <div class="form-group row">
+                        <div class="col-sm-14 com-sm-offset-1">
+                        <button type="button" class="btn btn-default" id="lcb-xmpp"><i class="fa fa-comments"></i> XMPP/Jabber Connection details</button>
                     </div>
-
                 </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Room</label>
+                        <div class="col-sm-10">
+                            <select class="form-control input-lg" name="room"></select>
+                        </div>
+                    </div>
+                    <div id="lcb-tokens">
+                        <p>Auth tokens are used to access the Let's Chat API.</p>
+
+                        <button class="generate-token btn btn-info" style="position: center">Generate token</button>
+                        <button class="revoke-token btn btn-danger" style="position: center">Revoke token</button>
+                    </div>
+                    <div class="generated-token" style="display: none">
+                        <div class="alert alert-success" role="alert">
+                        Your generated token is below. It will not be shown again.
+                        </div>
+                    <textarea class="token form-control"></textarea>
+                    </div>
+                </div>
+
                 <div class="modal-footer">
-                    <button type="submit" class="submit-edit-otr btn btn-info indicator" name="submit"><i class="icon-ok"></i> Save</button>
+                    <button type="submit" class="submit-edit-otr btn btn-info indicator" name="submit"><i class="icon-ok"></i> Start OTR</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal"> Stop OTR</button>
                 </div>
             </form>
         </div>

@@ -18,6 +18,10 @@
                         <a class="btn hidden-xs lcb-upload-trigger" title="Upload Files" href="#">
                             <i class="fa fa-upload"></i>
                         </a>
+                        <a class="btn hidden-xs lcb-otr"
+                            title="OTR">
+                            <i class="fa fa-lock"></i>
+                        </a>
                     </h2>
                     <div class="lcb-room-description">
                         <article>{{description}}</article>
@@ -52,9 +56,8 @@
                 <h3 class="lcb-room-sidebar-heading">
                     <i class="fa fa-lock"></i> OTR
                 </h3>
-                <button class="btn lcb-room-sidebar-files-add lcb-upload-trigger" herf="#lcb-otr">
-                    <i class="fa fa-plus"></i>
-                </button>
+                 <a class="btn lcb-room-sidebar-files-add" data-toggle="modal" href="#lcb-otr" role="button">
+                </a>
                 </header>
                 <ul class="lcb-room-sidebar-list"></ul>
             </div>
