@@ -27,6 +27,9 @@
                         <% endif %>
                         <a class="btn hidden-xs lcb-giphy" href="#lcb-giphy" title="<$ __('Giphy') $>" data-toggle="modal">
                             <i class="fa fa-gift"></i>
+                        <a class="btn hidden-xs lcb-otr"
+                            title="OTR">
+                            <i class="fa fa-lock"></i>This chat is encrypted.
                         </a>
                     </h2>
                     <div class="lcb-room-description">
@@ -60,9 +63,8 @@
                 <h3 class="lcb-room-sidebar-heading">
                     <i class="fa fa-lock"></i> OTR
                 </h3>
-                <button class="btn lcb-room-sidebar-files-add lcb-upload-trigger" herf="#lcb-otr">
-                    <i class="fa fa-plus"></i>
-                </button>
+                 <a class="btn lcb-room-sidebar-files-add" data-toggle="modal" href="#lcb-otr" role="button">
+                </a>
                 </header>
                 <ul class="lcb-room-sidebar-list"></ul>
             </div>
