@@ -1,4 +1,4 @@
-<div id="lcb-otr" class="modal fade">
+<div id="lcb-otr" class="modal dropzone fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="validate form-horizontal" method="submit">
@@ -20,33 +20,77 @@
                                 <label><input type="radio" name="optionsRadios" id="optionsRadios4" value="option4"> No OTR encryption</label>
                             </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-sm-14 com-sm-offset-1">
-                        <button type="button" class="btn btn-default" id="lcb-xmpp"><i class="fa fa-comments"></i> XMPP/Jabber Connection details</button>
+                <div class="form-group row">
+                    <div class="col-sm-14 com-sm-offset-1">
+                       <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#xmpp"><i class="fa fa-comments"></i> XMPP/Jabber Connection Details</button>
+
+                    <div id="xmpp" class="collapse">
+                      <div class="row">
+                        <div class="col-sm-12">
+
+                        <h4>Connection Details</h4>
+
+                        <dl class="">
+                            <dt>Username</dt>
+                            <dd>
+                                <% if account.local %>
+                                    <$ account.username $>@<$ settings.xmpp.domain $>
+                                <% else %>
+                                    <$ account.uid $>@<$ settings.xmpp.domain $>
+                                <% endif %></dd>
+                            <% if settings.xmpp.port != 5222 %>
+                            <dt>Port</dt>
+                            <dd><$ settings.xmpp.port $></dd>
+                            <% endif %>
+                        </dl>
+
+                        <dl class="">
+                            <dt>Host</dt>
+                            <dd><$ settings.xmpp.domain $></dd>
+                            <% if settings.xmpp.port == 5222 %>
+                            <dt>Port</dt>
+                            <dd><$ settings.xmpp.port $></dd>
+                            <% endif %>
+                            <dt>Conference Host</dt>
+                            <dd><$ settings.xmpp.confdomain $></dd>
+                        </dl>
+
+                        </div>
+                        <div class="col-sm-6">
+
+                        <h4>Supported Clients</h4>
+
+                        <h6>Desktop</h6>
+
+                        <ul class="list-unstyled">
+                            <li><a href="https://adium.im/">Adium</a></li>
+                            <li><a href="https://www.pidgin.im/">Pidgin</a></li>
+                            <li><a href="http://profanity.im/">Profanity</a></li>
+                            <li><a href="http://psi-im.org/">Psi</a></li>
+                        </ul>
+
+                        </div>
+                       </div>
+                     </div>
                     </div>
                 </div>
+
                     <div class="form-group">
                         <label class="control-label col-sm-3">Room</label>
                         <div class="col-sm-10">
                             <select class="form-control input-lg" name="room"></select>
                         </div>
                     </div>
-                    <div id="lcb-tokens">
-                        <p>Auth tokens are used to access the Let's Chat API.</p>
-
-                        <button class="generate-token btn btn-info" style="position: center">Generate token</button>
-                        <button class="revoke-token btn btn-danger" style="position: center">Revoke token</button>
+                    <div class="form-group">
+                        <div class="col-sm-14 com-sm-offset-1">
+                        <a  data-toggle="modal"  class="btn btn-default" href="#lcb-key" role="button"><i class="fa fa-key"></i> Here comes your key
+                        </a>
                     </div>
-                    <div class="generated-token" style="display: none">
-                        <div class="alert alert-success" role="alert">
-                        Your generated token is below. It will not be shown again.
-                        </div>
-                    <textarea class="token form-control"></textarea>
-                    </div>
-                </div>
+                    
+        </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="submit-edit-otr btn btn-info indicator" name="submit"><i class="icon-ok"></i> Start OTR</button>
+                    <button type="submit" class="start-otr btn btn-info indicator" name="submit" ><i class="icon-ok"></i> Start OTR</button>
                      <button type="button" class="btn btn-default" data-dismiss="modal"> Stop OTR</button>
                 </div>
             </form>
