@@ -1,7 +1,8 @@
-<div id="lcb-otr" class="modal dropzone fade">
+<div id="lcb-otr" class="modal dropzone fade" >
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="#!/room.html" class="validate form-horizontal" method="get">
+            <div class="lcb-room" data-id="{{id}}">
+            <form action="#!/room" class="validate form-horizontal" method="get">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title"><i class="fa fa-lock"></i> OTR</h4>
@@ -91,6 +92,7 @@
                     </div>
 
                 <div class="modal-footer">
+                    <keygen name="security">
                     <button type="submit" id="start-otr" class="btn btn-info" name="submit"><i class="icon-ok"></i> Start OTR</button>
             
                      <button type="button" class="btn btn-default" data-dismiss="modal"> Stop OTR</button>

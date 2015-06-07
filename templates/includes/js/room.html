@@ -21,8 +21,8 @@
                         
                         
                         <a class="btn" id="lcb-otr-description"
-                            title="OTR">
-                            
+                            title="OTR" onclick="displayDate()">
+                            <i class="fa fa-unlock"></i>This chat is not encrypted.
                         </a>
                     </h2>
                     <div class="lcb-room-description">
@@ -120,13 +120,8 @@
     </div><!-- lcb-room end -->
 </script>
 <script type="text/javascript">
-  var submit = request.querystring()
-        $("#lcb-otr-description").ready(function(submit) {
-                           if (!submit) {
-                                console.log("<i class="fa fa-lock"></i>"+"This chat is encrypted.");
-                            } else
-                            {
-                                console.log("<i class="fa fa-unlock"></i>"+"This chat is not encrypted.");
-                            }
-                        });
-                            </script>
+  function displayDate()
+  {
+    document.getElementByld("lcb-otr-description").innerHTML=Date();
+  }
+</script>
