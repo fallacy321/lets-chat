@@ -75,5 +75,8 @@
 	"XMPP/Jabber": "XMPP/Jabber",
 	"Private?": "Private?",
 	"Empty for public room": "Empty for public room",
-	"This room is not encrypted.": "This room is not encrypted."
+	"This room is not encrypted.": "This room is not encrypted.",
+	"This room is public.": "This room is public.",
+	"This chat is encrypted.": "This chat is encrypted.",
+	"This chat is not encrypted.": "This chat is not encrypted."
 }
