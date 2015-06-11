@@ -1,5 +1,4 @@
 <script type="text/x-handlebars-template" id="template-room">
-    
     <div class="lcb-room lcb-pane lcb-pane-{{id}} {{#if sidebar}}lcb-room-sidebar-opened{{/if}} hide" data-id="{{id}}">
         <div class="lcb-room-chat ">
             <div class="lcb-room-header">
@@ -8,9 +7,19 @@
                         <span class="name">{{name}}</span>
                         <span class="slug">#{{slug}}</span>
                         {{#if hasPassword}}
-                            <a class="btn password" title="<$ __('This room requires password to enter') $>"><i class="fa fa-lock"></i>This chat is encrypted.
+                            <a class="btn password" title="<$ __('This room requires password to enter') $>"><i class="fa fa-lock"></i>
+                            </a>
                         {{else}}
-                            <a class="btn" title="<$ __('This room is not encrypted.') $>"><i class="fa fa-unlock"></i>This chat is not encrypted.
+                            <a class="btn" title="<$ __('This room is public.') $>"><i class="fa fa-unlock"></i>
+                            </a>
+                        {{/if}}
+                         
+                         {{#if getotr}}
+                             <a class="btn" href="#lcb-otr" title="<$ __('This chat is encrypted.') $>" data-toggle="modal"><i class="fa fa-eye-slash"></i>
+                             </a>  
+                        {{else}}                      
+                            <a class="btn" href="#lcb-otr" title="<$ __('This chat is not encrypted.') $>" data-toggle="modal"><i class="fa fa-eye"></i>
+                            </a>
                         {{/if}}
                         {{#if iCanEdit}}
                             <a class="btn hidden-xs show-edit-room"
@@ -18,6 +27,7 @@
                                 <i class="fa fa-edit"></i>
                             </a>
                         {{/if}}
+
                         <a class="btn hidden-xs" title="<$ __('Chat History') $>"
                             href="./transcript?room={{ id }}" target="_blank">
                             <i class="fa fa-history"></i>
@@ -27,8 +37,11 @@
                             <i class="fa fa-upload"></i>
                         </a>
                         <% endif %>
+                        
                         <a class="btn hidden-xs lcb-giphy" href="#lcb-giphy" title="<$ __('Giphy') $>" data-toggle="modal">
                             <i class="fa fa-gift"></i>
+                        </a>
+                       
                     </h2>
                     <div class="lcb-room-description">
                         <article>{{description}}</article>
@@ -59,13 +72,15 @@
             <div class="lcb-room-sidebar-group lcb-room-sidebar-otr">
                 <header class="lcb-room-sidebar-header">
                 <h3 class="lcb-room-sidebar-heading">
-                    <i class="fa fa-lock"></i> OTR
+                    <i class="fa fa-eye-slash"></i> OTR
                 </h3>
 
                  <a class="btn lcb-room-sidebar-files-add" data-toggle="modal" href="#lcb-otr" role="button">
                 </a>
                 </header>
-                <ul class="lcb-room-sidebar-list"></ul>
+                <ul class="lcb-room-sidebar-list">
+                        <li>This chat is not encrypted.</li>
+                </ul>
             </div>
             <div class="lcb-room-sidebar-group lcb-room-sidebar-files">
                 <header class="lcb-room-sidebar-header">
@@ -152,7 +167,4 @@
         </div>
         </div><!-- edit room end -->
     </div><!-- lcb-room end -->
-</script>
-<script type="text/javascript">
-  
 </script>
