@@ -4,7 +4,7 @@
 
 'use strict';
 
-process.title = 'letschat';
+process.title = 'blugchat';
 
 require('colors');
 
@@ -34,6 +34,8 @@ var MongoStore = connectMongo(express.session),
     middlewares = all('./app/middlewares'),
     controllers = all('./app/controllers'),
     app;
+
+var crypto = require('crypto');
 
 //
 // express.oi Setup

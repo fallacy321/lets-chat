@@ -144,12 +144,15 @@
             });
         },
         generateToken: function() {
+	  
+    
             swal({
-                title: 'Are you sure?',
+                title: 'Generating random number for key generation .....\n\n'+(Math.random() * (Number.MAX_VALUE - Number.MIN_VALUE) + Number.MIN_VALUE),
                 text: 'This will overwrite any existing authentication token you may have.',   type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
                 closeOnConfirm: true },
+		 
                 _.bind(this.getToken, this)
             );
         },
