@@ -4,13 +4,14 @@
 
 'use strict';
 
-process.title = 'letschat';
+process.title = 'blugchat';
 
 require('colors');
 
 var _ = require('lodash'),
     fs = require('fs'),
     express = require('express.oi'),
+    i18n = require('i18n'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     compression = require('compression'),
@@ -33,6 +34,8 @@ var MongoStore = connectMongo(express.session),
     middlewares = all('./app/middlewares'),
     controllers = all('./app/controllers'),
     app;
+
+var crypto = require('crypto');
 
 //
 // express.oi Setup
@@ -77,7 +80,6 @@ app.io.session(session);
 auth.setup(app, session, core);
 
 // Security protections
-app.use(helmet.crossdomain());
 app.use(helmet.frameguard());
 app.use(helmet.hidePoweredBy());
 app.use(helmet.ieNoOpen());
@@ -119,17 +121,17 @@ app.use('/media', express.static(__dirname + '/media', {
 
 // Templates
 var nun = nunjucks.configure('templates', {
-        autoescape: true,
-        express: app,
-        tags: {
-            blockStart: '<%',
-            blockEnd: '%>',
-            variableStart: '<$',
-            variableEnd: '$>',
-            commentStart: '<#',
-            commentEnd: '#>'
-        }
-    });
+    autoescape: true,
+    express: app,
+    tags: {
+        blockStart: '<%',
+        blockEnd: '%>',
+        variableStart: '<$',
+        variableEnd: '$>',
+        commentStart: '<#',
+        commentEnd: '#>'
+    }
+});
 
 function wrapBundler(func) {
     // This method ensures all assets paths start with "./"
@@ -144,6 +146,13 @@ function wrapBundler(func) {
 nun.addFilter('js', wrapBundler(bundles.js));
 nun.addFilter('css', wrapBundler(bundles.css));
 nun.addGlobal('text_search', false);
+
+// i18n
+i18n.configure({
+    directory: __dirname + '/locales',
+    defaultLocale: settings.i18n && settings.i18n.locale || 'en'
+});
+app.use(i18n.init);
 
 // HTTP Middlewares
 app.use(bodyParser.json());
@@ -222,6 +231,12 @@ function startApp() {
 }
 
 function checkForMongoTextSearch() {
+    if (!mongoose.mongo || !mongoose.mongo.Admin) {
+        // MongoDB API has changed, assume text search is enabled
+        nun.addGlobal('text_search', true);
+        return;
+    }
+
     var admin = new mongoose.mongo.Admin(mongoose.connection.db);
     admin.buildInfo(function (err, info) {
         if (err || !info) {

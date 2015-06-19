@@ -61,6 +61,7 @@
                     rooms: this.client.rooms
                 });
             }
+
             //
             // Modals
             //
@@ -75,8 +76,14 @@
             this.tokenModal = new window.LCB.AuthTokensModalView({
                 el: this.$el.find('#lcb-tokens')
             });
+	    this.keyModal = new window.LCB.AuthKeyModalView ({
+	        el: this.$el.find('#lcb-key')
+	    });
             this.notificationsModal = new window.LCB.NotificationsModalView({
                 el: this.$el.find('#lcb-notifications')
+            });
+            this.giphyModal = new window.LCB.GiphyModalView({
+                el: this.$el.find('#lcb-giphy')
             });
             //
             // Misc

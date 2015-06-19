@@ -39,7 +39,8 @@
                 ranges = {
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 7 Days': [moment().subtract(7, 'days'), moment()],
+                    'Last 15 Days' : [moment().subtract(14, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
                 }
 
@@ -61,7 +62,7 @@
                     startDate: this.startDate,
                     endDate: this.endDate,
                     dateLimit: {
-                        months: 1
+                        months: 4
                     },
                     ranges: ranges
                 }, setRange);
@@ -72,7 +73,7 @@
         search: _.throttle(function() {
             this.query = this.$query.val()
             this.loadTranscript();
-        }, 400),
+        }, 400, {leading: false}),
         loadTranscript: function() {
             var that = this;
             this.clearMessages();
@@ -120,7 +121,7 @@
             return window.utils.message.format(text, this.formatData);
         },
         formatTimestamp: function($el) {
-            var time = moment($el.attr('title')).format('ddd, MMM Do YYYY, h:mm:ss a');
+             var time = moment($el.attr('title')).format('ddd, MMM Do YYYY, h:mm:ss a').toLocaleString();
             $el.text(time);
         }
     });

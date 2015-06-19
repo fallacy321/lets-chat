@@ -129,6 +129,7 @@
         keys: {
             'up+shift+alt down+shift+alt': 'nextRoom',
             's+shift+alt': 'toggleRoomSidebar',
+            'g+shift+alt': 'openGiphyModal',
             'space+shift+alt': 'recallRoom'
         },
         initialize: function(options) {
@@ -147,10 +148,14 @@
         recallRoom: function() {
             this.client.events.trigger('rooms:switch', this.rooms.last.get('id'));
         },
-        toggleRoomSidebar: function(e) {
+	toggleRoomSidebar: function(e) {
             e.preventDefault();
             var view = this.client.view.panes.views[this.rooms.current.get('id')];
             view && view.toggleSidebar && view.toggleSidebar();
+        },
+        openGiphyModal: function(e) {
+            e.preventDefault();
+            $('.lcb-giphy').modal('show');
         }
     });
 
