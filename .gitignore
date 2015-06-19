@@ -14,3 +14,5 @@ npm-debug.log
 *.pem
 *.crt
 *.csr
+*~
+*.orig
