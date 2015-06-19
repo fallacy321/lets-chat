@@ -55,7 +55,7 @@ var RoomSchema = new mongoose.Schema({
     },
     private: {
         type: Boolean,
-        default: true
+        default: false
     },
     password: {
         type: String,
