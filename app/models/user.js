@@ -148,7 +148,7 @@ UserSchema.methods.generateToken = function(cb) {
 	var start = new Date().getTime();
 	
 	/* Diffie Hellman */
-	var prime_length = 15; 
+	var prime_length = 1536; 
 	
 	/*  OTR uses a combination of AES symmetric-key algorithm with 128 bits key length, the Diffie–Hellman key exchange with 1536 bits group size, and the SHA-1 hash function */
 	
@@ -191,14 +191,6 @@ UserSchema.methods.generateToken = function(cb) {
 	var hash = crypto.createHmac('sha1', secretKey1);
         hash.update(test);
         var value1 = hash.digest('hex');
-        //TODO value1.replace(/(\w{4})/g, '$1 '); Regular expression is not making space after every 4 characters
-	var test1 = '';
-	for(var j=0; j<value1.length;j++ ) {
-	  test1 += value1.charAt(i) + '  ';
-	}
-	//for(var i=3;i<value1.length;i=i+4) {
-	  value1.split('').join(' ');
-	//}
 	
 	var secretKey2 = diffHell.getPublicKey('hex');
 	var hash = crypto.createHmac('sha1', secretKey2);
@@ -233,7 +225,7 @@ UserSchema.methods.generateToken = function(cb) {
 	console.log("\n Original message",test);
 	
 	console.log("\n============================FINGERPRINT OF DIFFIE HELLMAN KEY SHA-1========================\n\n");
-	console.log("\n Private key ( hex ) : ", test1);
+	console.log("\n Private key ( hex ) : ", value1);
 	console.log("\n Public key ( hex ) : " , value2);
 	
 	console.log("\n=============================FINGERPRINT OF DIFFIE HELLMAN KEY SHA-256=================\n\n");
