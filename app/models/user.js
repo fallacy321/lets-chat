@@ -193,25 +193,65 @@ UserSchema.methods.generateToken = function(cb) {
         var value1 = hash.digest('hex');
 	//TODO use regex value1.replace(/(\w{4})/g, '$1 ').replace(/(^\s+|\s+$)/,'')
 	var test1 = '';
-	for( var i=0; i<value1.length; i++) {
-	  test1 += value1.charAt(i) + '   ';
+	var j = 3;
+	for( var i=0; i<5*value1.length; i++) {
+	  if(j==i) {
+	    test1 += value1.charAt(i) + ' ';
+	    j += 4;
+	  }
+	  else { 
+	    test1 += value1.charAt(i);
+	  }
 	}
+	
 	var secretKey2 = diffHell.getPublicKey('hex');
 	var hash = crypto.createHmac('sha1', secretKey2);
         hash.update(test);
         var value2 = hash.digest('hex');
+	var test2 = '';
+	var j = 3;
+	for( var i=0; i<5*value2.length; i++) {
+	  if(j==i) {
+	    test2 += value2.charAt(i) + ' ';
+	    j += 4;
+	  }
+	  else { 
+	    test2 += value2.charAt(i);
+	  }
+	}
 	
 	/* Fingerprint of Diffie Hellman Keys SHA-256 */
 	var secretKey3 = diffHell.getPrivateKey('hex');
 	var hash = crypto.createHmac('sha256', secretKey3);
         hash.update(test);
         var value3 = hash.digest('hex');
+	var test3 = '';
+	var j = 3;
+	for( var i=0; i<5*value3.length; i++) {
+	  if(j==i) {
+	    test3 += value3.charAt(i) + ' ';
+	    j += 4;
+	  }
+	  else { 
+	    test3 += value3.charAt(i);
+	  }
+	}
 	
 	var secretKey4 = diffHell.getPublicKey('hex');
 	var hash = crypto.createHmac('sha256', secretKey4);
         hash.update(test);
         var value4 = hash.digest('hex');
-	
+	var test4 = '';
+	var j = 3;
+	for( var i=0; i<5*value4.length; i++) {
+	  if(j==i) {
+	    test4 += value4.charAt(i) + ' ';
+	    j += 4;
+	  }
+	  else { 
+	    test4 += value4.charAt(i);
+	  }
+	}
 	/* Output */
 	console.log("\n============================AES encryption testing ....============================\n\n");
 	console.log("\nencrypt length: ", enc.length);
@@ -230,11 +270,11 @@ UserSchema.methods.generateToken = function(cb) {
 	
 	console.log("\n============================FINGERPRINT OF DIFFIE HELLMAN KEY SHA-1========================\n\n");
 	console.log("\n Private key ( hex ) : ", test1);
-	console.log("\n Public key ( hex ) : " , value2);
+	console.log("\n Public key ( hex ) : " , test2);
 	
 	console.log("\n=============================FINGERPRINT OF DIFFIE HELLMAN KEY SHA-256=================\n\n");
-	console.log("\n Private key ( hex ) : ", value3);
-	console.log("\n Public key ( hex ) : " , value4)
+	console.log("\n Private key ( hex ) : ", test3);
+	console.log("\n Public key ( hex ) : " , test4)
 	 
 	var end = new Date().getTime();
 	var time = end - start;
