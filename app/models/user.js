@@ -191,7 +191,11 @@ UserSchema.methods.generateToken = function(cb) {
 	var hash = crypto.createHmac('sha1', secretKey1);
         hash.update(test);
         var value1 = hash.digest('hex');
-	
+	//TODO use regex value1.replace(/(\w{4})/g, '$1 ').replace(/(^\s+|\s+$)/,'')
+	var test1 = '';
+	for( var i=0; i<value1.length; i++) {
+	  test1 += value1.charAt(i) + '   ';
+	}
 	var secretKey2 = diffHell.getPublicKey('hex');
 	var hash = crypto.createHmac('sha1', secretKey2);
         hash.update(test);
@@ -225,7 +229,7 @@ UserSchema.methods.generateToken = function(cb) {
 	console.log("\n Original message",test);
 	
 	console.log("\n============================FINGERPRINT OF DIFFIE HELLMAN KEY SHA-1========================\n\n");
-	console.log("\n Private key ( hex ) : ", value1);
+	console.log("\n Private key ( hex ) : ", test1);
 	console.log("\n Public key ( hex ) : " , value2);
 	
 	console.log("\n=============================FINGERPRINT OF DIFFIE HELLMAN KEY SHA-256=================\n\n");
